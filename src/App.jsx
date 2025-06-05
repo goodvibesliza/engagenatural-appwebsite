@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card.jsx'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog.jsx'
 import { Input } from '@/components/ui/input.jsx'
 import { Textarea } from '@/components/ui/textarea.jsx'
-import { CheckCircle, X, ArrowRight, Users, TrendingUp, Target, Linkedin, Mail, User, MessageSquare, Home, Trophy, BookOpen, Brain, BarChart3, Star, Award, Clock, CheckCircle2 } from 'lucide-react'
+import { CheckCircle, X, ArrowRight, Users, TrendingUp, Target, Linkedin, Mail, User, MessageSquare, Home, Trophy, BookOpen, Brain, BarChart3, Star, Award, Clock, CheckCircle2, LogIn, Calendar } from 'lucide-react'
 import './App.css'
 
 // Import assets
@@ -21,11 +21,30 @@ function App() {
     message: ''
   })
 
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  })
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleLoginChange = (e) => {
+    setLoginData({
+      ...loginData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    // For demo purposes, just show an alert
+    alert('Login functionality would connect to the EngageNatural app here!')
+    setLoginData({ email: '', password: '' })
   }
 
   const handleSubmit = (e) => {
@@ -372,9 +391,61 @@ function App() {
               <a href="#features" className="text-gray-700 hover:text-green-600 transition-colors">Features</a>
               <a href="#how-it-works" className="text-gray-700 hover:text-green-600 transition-colors">How It Works</a>
               <a href="#about" className="text-gray-700 hover:text-green-600 transition-colors">About</a>
+              <a href="#book-discussion" className="text-gray-700 hover:text-green-600 transition-colors">Book Discussion</a>
               <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
             </div>
-            <Button onClick={scrollToContact} className="bg-green-600 hover:bg-green-700">Get Early Access</Button>
+            <div className="flex space-x-4">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Login
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <div className="text-center mb-6">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Login to EngageNatural</h2>
+                    <p className="text-gray-600">Access your retail staff community</p>
+                  </div>
+                  <form onSubmit={handleLogin} className="space-y-4">
+                    <div>
+                      <Input
+                        type="email"
+                        name="email"
+                        placeholder="Email address"
+                        value={loginData.email}
+                        onChange={handleLoginChange}
+                        required
+                        className="w-full"
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={loginData.password}
+                        onChange={handleLoginChange}
+                        required
+                        className="w-full"
+                      />
+                    </div>
+                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
+                      Login to App
+                    </Button>
+                  </form>
+                  <div className="text-center mt-4">
+                    <p className="text-sm text-gray-600">
+                      Don't have an account? 
+                      <Button variant="link" className="text-green-600 p-0 ml-1" onClick={scrollToContact}>
+                        Request Access
+                      </Button>
+                    </p>
+                  </div>
+                </DialogContent>
+              </Dialog>
+              <Button onClick={scrollToContact} className="bg-green-600 hover:bg-green-700">Get Early Access</Button>
+            </div>
           </div>
         </div>
       </nav>
@@ -652,7 +723,7 @@ function App() {
                   <span className="text-2xl font-bold text-gray-900">2</span>
                 </div>
                 <h3 className="text-xl font-bold mb-4">Learn & Connect</h3>
-                <p className="text-gray-300">Quizzes, challenges, and peer interaction build skills and loyalty.</p>
+                <p className="text-gray-300">Brands pay for a monthly community and engage directly with participants they choose. They can include challenges to take product, free samples, and engaging games while they develop connections with other retailers.</p>
               </CardContent>
             </Card>
 
@@ -715,6 +786,90 @@ function App() {
                     Connect on LinkedIn
                   </Button>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Book a Discussion Section */}
+      <section id="book-discussion" className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Book a Discussion</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Schedule a personalized conversation about how EngageNatural can transform your retail staff training and engagement.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">What we'll discuss:</h3>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Your specific needs</h4>
+                    <p className="text-gray-600">Understanding your retail environment and training challenges</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">App demonstration</h4>
+                    <p className="text-gray-600">Live walkthrough of EngageNatural's features and capabilities</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Implementation strategy</h4>
+                    <p className="text-gray-600">How to roll out the platform to your retail staff effectively</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">ROI projections</h4>
+                    <p className="text-gray-600">Expected impact on sales, staff retention, and brand loyalty</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="text-center mb-6">
+                <Calendar className="w-12 h-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Schedule Your Call</h3>
+                <p className="text-gray-600">30-minute personalized discussion</p>
+              </div>
+              
+              <div className="bg-gray-50 rounded-lg p-6 text-center">
+                <p className="text-gray-600 mb-4">
+                  Click below to choose a time that works for you
+                </p>
+                <Button 
+                  className="w-full bg-green-600 hover:bg-green-700 text-lg py-3"
+                  onClick={() => {
+                    // Placeholder for Cal.com integration
+                    alert('Cal.com booking will be integrated here. Please use the contact form below for now to request a discussion.')
+                  }}
+                >
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Schedule with Cal.com
+                </Button>
+                <p className="text-sm text-gray-500 mt-3">
+                  Free consultation • No commitment required • Powered by Cal.com
+                </p>
+              </div>
+              
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-600">
+                  Prefer to reach out directly? 
+                  <Button variant="link" className="text-green-600 p-0 ml-1" onClick={scrollToContact}>
+                    Send us a message
+                  </Button>
+                </p>
               </div>
             </div>
           </div>
