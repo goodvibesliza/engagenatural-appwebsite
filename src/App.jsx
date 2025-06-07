@@ -1,16 +1,7 @@
 import React, { useState } from 'react'
-import { Button } from '@/components/ui/button.jsx'
-import { Card, CardContent } from '@/components/ui/card.jsx'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog.jsx'
-import { Input } from '@/components/ui/input.jsx'
-import { Textarea } from '@/components/ui/textarea.jsx'
-import { CheckCircle, X, ArrowRight, Users, TrendingUp, Target, Linkedin, Mail, User, MessageSquare, Home, Trophy, BookOpen, Brain, BarChart3, Star, Award, Clock, CheckCircle2, LogIn, Calendar, Building2, UserCheck, Zap, Shield, Heart, Gamepad2 } from 'lucide-react'
 import './App.css'
 
 // Import assets
-import salesImpactGraph from './assets/sales_impact_graph.png'
-import roiGrowthGraph from './assets/roi_growth_graph.png'
-import userEngagementGraph from './assets/user_engagement_graph.png'
 import lizaHeadshot from './assets/Lizaonbeachheadshot.jpeg'
 import communityPhoto from './assets/communityof5.jpg'
 import diverseGroupPhoto from './assets/grouppicdiverse.jpg'
@@ -26,6 +17,7 @@ function App() {
     message: ''
   })
 
+  const [showLogin, setShowLogin] = useState(false)
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
@@ -47,14 +39,13 @@ function App() {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    // For demo purposes, just show an alert
     alert('Login functionality would connect to the EngageNatural app here!')
     setLoginData({ email: '', password: '' })
+    setShowLogin(false)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Formspree will handle the form submission
     const form = e.target
     const formData = new FormData(form)
     
@@ -77,7 +68,7 @@ function App() {
   }
 
   const scrollToContact = () => {
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -100,70 +91,79 @@ function App() {
               >
                 For Brands
               </button>
-              <a href="/landing" className="text-gray-700 hover:text-green-600 transition-colors">App Details</a>
               <a href="#book-discussion" className="text-gray-700 hover:text-green-600 transition-colors">Book Discussion</a>
               <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
             </div>
             <div className="flex space-x-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
-                    <LogIn className="w-4 h-4 mr-2" />
-                    Login
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <div className="text-center mb-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Login to EngageNatural</h2>
-                    <p className="text-gray-600">Access your retail staff community</p>
-                  </div>
-                  <form onSubmit={handleLogin} className="space-y-4">
-                    <div>
-                      <Input
-                        type="email"
-                        name="email"
-                        placeholder="Email address"
-                        value={loginData.email}
-                        onChange={handleLoginChange}
-                        required
-                        className="w-full"
-                      />
-                    </div>
-                    <div>
-                      <Input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={loginData.password}
-                        onChange={handleLoginChange}
-                        required
-                        className="w-full"
-                      />
-                    </div>
-                    <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-                      Login to App
-                    </Button>
-                  </form>
-                  <div className="text-center mt-4">
-                    <p className="text-sm text-gray-600">
-                      Don't have an account? 
-                      <Button variant="link" className="text-green-600 p-0 ml-1" onClick={scrollToContact}>
-                        Request Access
-                      </Button>
-                    </p>
-                  </div>
-                </DialogContent>
-              </Dialog>
-              <Button 
+              <button 
+                onClick={() => setShowLogin(true)}
+                className="border border-green-600 text-green-600 hover:bg-green-50 px-4 py-2 rounded-md transition-colors"
+              >
+                Login
+              </button>
+              <button 
                 onClick={() => setActiveTab('retail-staff')} 
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md transition-colors"
               >
                 Join Free
-              </Button>
+              </button>
             </div>
           </div>
         </div>
       </nav>
+
+      {/* Login Modal */}
+      {showLogin && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Login to EngageNatural</h2>
+              <p className="text-gray-600">Access your retail staff community</p>
+            </div>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email address"
+                  value={loginData.email}
+                  onChange={handleLoginChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+              <div>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={loginData.password}
+                  onChange={handleLoginChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+              <button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md transition-colors">
+                Login to App
+              </button>
+            </form>
+            <div className="text-center mt-4">
+              <p className="text-sm text-gray-600">
+                Don't have an account? 
+                <button onClick={scrollToContact} className="text-green-600 ml-1 underline">
+                  Request Access
+                </button>
+              </p>
+            </div>
+            <button 
+              onClick={() => setShowLogin(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
@@ -180,25 +180,24 @@ function App() {
                   Join the verified community for natural products retail professionals. Free access to exclusive training, brand connections, and rewards.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3">
-                    <UserCheck className="w-5 h-5 mr-2" />
+                  <button className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-3 rounded-md transition-colors">
                     Join Free Today
-                  </Button>
-                  <Button variant="outline" size="lg" className="text-lg px-8 py-3">
+                  </button>
+                  <button className="border border-gray-300 text-gray-700 hover:bg-gray-50 text-lg px-8 py-3 rounded-md transition-colors">
                     Learn More
-                  </Button>
+                  </button>
                 </div>
                 <div className="flex items-center space-x-6 text-sm text-gray-600">
                   <div className="flex items-center">
-                    <Shield className="w-4 h-4 mr-2 text-green-600" />
+                    <span className="w-4 h-4 mr-2 text-green-600">🛡️</span>
                     Verified Staff Only
                   </div>
                   <div className="flex items-center">
-                    <Heart className="w-4 h-4 mr-2 text-green-600" />
+                    <span className="w-4 h-4 mr-2 text-green-600">❤️</span>
                     Free Forever
                   </div>
                   <div className="flex items-center">
-                    <Gamepad2 className="w-4 h-4 mr-2 text-green-600" />
+                    <span className="w-4 h-4 mr-2 text-green-600">🎮</span>
                     Fun & Engaging
                   </div>
                 </div>
@@ -214,7 +213,7 @@ function App() {
                     />
                     <div className="p-6">
                       <h3 className="font-bold text-lg mb-2 flex items-center">
-                        <Heart className="w-5 h-5 mr-2 text-green-600" />
+                        <span className="w-5 h-5 mr-2 text-green-600">❤️</span>
                         Real Community
                       </h3>
                       <p className="text-gray-600 text-sm">
@@ -237,25 +236,24 @@ function App() {
                   Connect directly with verified natural products retail staff. Build genuine relationships that drive sales through targeted education and engagement.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3">
-                    <Building2 className="w-5 h-5 mr-2" />
+                  <button className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-3 rounded-md transition-colors">
                     Get Started
-                  </Button>
-                  <Button variant="outline" size="lg" className="text-lg px-8 py-3" onClick={scrollToContact}>
+                  </button>
+                  <button onClick={scrollToContact} className="border border-gray-300 text-gray-700 hover:bg-gray-50 text-lg px-8 py-3 rounded-md transition-colors">
                     Book Demo
-                  </Button>
+                  </button>
                 </div>
                 <div className="flex items-center space-x-6 text-sm text-gray-600">
                   <div className="flex items-center">
-                    <Target className="w-4 h-4 mr-2 text-green-600" />
+                    <span className="w-4 h-4 mr-2 text-green-600">🎯</span>
                     Verified Audience
                   </div>
                   <div className="flex items-center">
-                    <TrendingUp className="w-4 h-4 mr-2 text-green-600" />
+                    <span className="w-4 h-4 mr-2 text-green-600">📈</span>
                     Proven ROI
                   </div>
                   <div className="flex items-center">
-                    <Zap className="w-4 h-4 mr-2 text-green-600" />
+                    <span className="w-4 h-4 mr-2 text-green-600">⚡</span>
                     Direct Engagement
                   </div>
                 </div>
@@ -271,7 +269,7 @@ function App() {
                     />
                     <div className="p-6">
                       <h3 className="font-bold text-lg mb-2 flex items-center">
-                        <BarChart3 className="w-5 h-5 mr-2 text-green-600" />
+                        <span className="w-5 h-5 mr-2 text-green-600">📊</span>
                         Engaged Community
                       </h3>
                       <div className="grid grid-cols-2 gap-4 mb-4">
@@ -317,39 +315,33 @@ function App() {
               </div>
               
               <div className="grid md:grid-cols-3 gap-8">
-                <Card className="p-6 text-center">
-                  <CardContent className="p-0">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
-                      <img 
-                        src={handPilePhoto} 
-                        alt="Teamwork" 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Industry-Specific Community</h3>
-                    <p className="text-gray-600">Connect with fellow natural products professionals who understand your challenges and share your passion.</p>
-                  </CardContent>
-                </Card>
+                <div className="bg-white p-6 text-center rounded-lg shadow-md">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                    <img 
+                      src={handPilePhoto} 
+                      alt="Teamwork" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Industry-Specific Community</h3>
+                  <p className="text-gray-600">Connect with fellow natural products professionals who understand your challenges and share your passion.</p>
+                </div>
 
-                <Card className="p-6 text-center">
-                  <CardContent className="p-0">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Gamepad2 className="w-8 h-8 text-blue-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Fun Learning Experience</h3>
-                    <p className="text-gray-600">Engaging games, challenges, and interactive content make learning about products enjoyable and memorable.</p>
-                  </CardContent>
-                </Card>
+                <div className="bg-white p-6 text-center rounded-lg shadow-md">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-3xl">🎮</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Fun Learning Experience</h3>
+                  <p className="text-gray-600">Engaging games, challenges, and interactive content make learning about products enjoyable and memorable.</p>
+                </div>
 
-                <Card className="p-6 text-center">
-                  <CardContent className="p-0">
-                    <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Users className="w-8 h-8 text-purple-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Direct Brand Connections</h3>
-                    <p className="text-gray-600">Get exclusive access to brand representatives, free samples, and special offers from your favorite natural products companies.</p>
-                  </CardContent>
-                </Card>
+                <div className="bg-white p-6 text-center rounded-lg shadow-md">
+                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-3xl">👥</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Direct Brand Connections</h3>
+                  <p className="text-gray-600">Get exclusive access to brand representatives, free samples, and special offers from your favorite natural products companies.</p>
+                </div>
               </div>
             </div>
           ) : (
@@ -360,35 +352,29 @@ function App() {
               </div>
               
               <div className="grid md:grid-cols-3 gap-8">
-                <Card className="p-6 text-center">
-                  <CardContent className="p-0">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Target className="w-8 h-8 text-green-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Verified Audience</h3>
-                    <p className="text-gray-600">Reach only verified natural products retail staff who influence purchasing decisions and customer recommendations.</p>
-                  </CardContent>
-                </Card>
+                <div className="bg-white p-6 text-center rounded-lg shadow-md">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-3xl">🎯</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Verified Audience</h3>
+                  <p className="text-gray-600">Reach only verified natural products retail staff who influence purchasing decisions and customer recommendations.</p>
+                </div>
 
-                <Card className="p-6 text-center">
-                  <CardContent className="p-0">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <TrendingUp className="w-8 h-8 text-blue-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Measurable ROI</h3>
-                    <p className="text-gray-600">Track engagement, product knowledge improvement, and sales impact through comprehensive analytics and reporting.</p>
-                  </CardContent>
-                </Card>
+                <div className="bg-white p-6 text-center rounded-lg shadow-md">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-3xl">📈</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Measurable ROI</h3>
+                  <p className="text-gray-600">Track engagement, product knowledge improvement, and sales impact through comprehensive analytics and reporting.</p>
+                </div>
 
-                <Card className="p-6 text-center">
-                  <CardContent className="p-0">
-                    <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Heart className="w-8 h-8 text-purple-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">Authentic Relationships</h3>
-                    <p className="text-gray-600">Build genuine connections through interactive challenges, educational content, and community engagement activities.</p>
-                  </CardContent>
-                </Card>
+                <div className="bg-white p-6 text-center rounded-lg shadow-md">
+                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-3xl">❤️</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Authentic Relationships</h3>
+                  <p className="text-gray-600">Build genuine connections through interactive challenges, educational content, and community engagement activities.</p>
+                </div>
               </div>
             </div>
           )}
@@ -407,7 +393,7 @@ function App() {
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <User className="w-8 h-8 text-green-600" />
+                  <span className="text-3xl">👤</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">1. Join & Verify</h3>
                 <p className="text-gray-600">Sign up with your retail credentials and get verified as a natural products professional. It's free and takes just minutes.</p>
@@ -415,7 +401,7 @@ function App() {
 
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Trophy className="w-8 h-8 text-blue-600" />
+                  <span className="text-3xl">🏆</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">2. Engage & Learn</h3>
                 <p className="text-gray-600">Participate in fun challenges, connect with brands, earn rewards, and expand your product knowledge through interactive content.</p>
@@ -423,7 +409,7 @@ function App() {
 
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Star className="w-8 h-8 text-purple-600" />
+                  <span className="text-3xl">⭐</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">3. Grow & Connect</h3>
                 <p className="text-gray-600">Build your professional network, advance your career, and become a trusted expert in natural products retail.</p>
@@ -433,7 +419,7 @@ function App() {
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Building2 className="w-8 h-8 text-green-600" />
+                  <span className="text-3xl">🏢</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">1. Set Up Your Community</h3>
                 <p className="text-gray-600">Create your brand presence and define your engagement strategy. Choose your target retail partners and set up your monthly community.</p>
@@ -441,7 +427,7 @@ function App() {
 
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-blue-600" />
+                  <span className="text-3xl">👥</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">2. Engage Directly</h3>
                 <p className="text-gray-600">Brands pay for monthly community access and engage directly with participants they choose. Include challenges, free samples, and engaging games while developing connections with retailers.</p>
@@ -449,7 +435,7 @@ function App() {
 
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <BarChart3 className="w-8 h-8 text-purple-600" />
+                  <span className="text-3xl">📊</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">3. Measure & Optimize</h3>
                 <p className="text-gray-600">Track engagement metrics, measure sales impact, and optimize your strategy based on real-time data and feedback from retail partners.</p>
@@ -472,14 +458,14 @@ function App() {
                 This platform bridges that gap by creating an authentic community where retail professionals can connect, learn, and grow while brands can engage meaningfully with the people who matter most to their success.
               </p>
               <div className="flex space-x-4">
-                <Button variant="outline" className="flex items-center">
-                  <Mail className="w-4 h-4 mr-2" />
+                <button className="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-md transition-colors flex items-center">
+                  <span className="mr-2">📧</span>
                   <a href="mailto:lizapoodle@gmail.com" className="text-gray-700">Contact Liza</a>
-                </Button>
-                <Button variant="outline" className="flex items-center">
-                  <Linkedin className="w-4 h-4 mr-2" />
+                </button>
+                <button className="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-md transition-colors flex items-center">
+                  <span className="mr-2">💼</span>
                   <a href="https://linkedin.com/in/lizaboone" target="_blank" rel="noopener noreferrer" className="text-gray-700">LinkedIn</a>
-                </Button>
+                </button>
               </div>
             </div>
             
@@ -509,7 +495,7 @@ function App() {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">What We'll Discuss:</h3>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <CheckCircle className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                  <span className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0">✅</span>
                   <div>
                     <h4 className="font-semibold text-gray-900">Your Specific Needs</h4>
                     <p className="text-gray-600">Understanding your brand's unique challenges and retail partnership goals</p>
@@ -517,7 +503,7 @@ function App() {
                 </div>
                 
                 <div className="flex items-start">
-                  <CheckCircle className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                  <span className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0">✅</span>
                   <div>
                     <h4 className="font-semibold text-gray-900">Platform Demo</h4>
                     <p className="text-gray-600">Live walkthrough of EngageNatural's features and engagement tools</p>
@@ -525,7 +511,7 @@ function App() {
                 </div>
                 
                 <div className="flex items-start">
-                  <CheckCircle className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                  <span className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0">✅</span>
                   <div>
                     <h4 className="font-semibold text-gray-900">Implementation Strategy</h4>
                     <p className="text-gray-600">Custom roadmap for launching your brand community and engagement campaigns</p>
@@ -533,7 +519,7 @@ function App() {
                 </div>
                 
                 <div className="flex items-start">
-                  <CheckCircle className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" />
+                  <span className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0">✅</span>
                   <div>
                     <h4 className="font-semibold text-gray-900">ROI Projections</h4>
                     <p className="text-gray-600">Data-driven insights on expected engagement rates and sales impact</p>
@@ -544,17 +530,16 @@ function App() {
             
             <div className="text-center">
               <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8 shadow-xl">
-                <Calendar className="w-16 h-16 text-green-600 mx-auto mb-6" />
+                <span className="text-6xl mb-6 block">📅</span>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Schedule Your Discussion</h3>
                 <p className="text-gray-600 mb-6">Choose a time that works for you. Sessions are typically 30-45 minutes and can be conducted via video call.</p>
-                <Button 
-                  size="lg" 
-                  className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3"
+                <button 
                   onClick={() => window.open('https://cal.com/lizaboonephd', '_blank')}
+                  className="bg-green-600 hover:bg-green-700 text-white text-lg px-8 py-3 rounded-md transition-colors inline-flex items-center"
                 >
-                  <Calendar className="w-5 h-5 mr-2" />
+                  <span className="mr-2">📅</span>
                   Schedule with Cal.com
-                </Button>
+                </button>
                 <p className="text-sm text-gray-500 mt-4">Free consultation • No commitment required</p>
               </div>
             </div>
@@ -575,7 +560,7 @@ function App() {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <Mail className="w-6 h-6 text-green-600 mr-3" />
+                  <span className="w-6 h-6 text-green-600 mr-3">📧</span>
                   <div>
                     <p className="font-semibold text-gray-900">Email</p>
                     <a href="mailto:lizapoodle@gmail.com" className="text-green-600 hover:text-green-700">lizapoodle@gmail.com</a>
@@ -583,7 +568,7 @@ function App() {
                 </div>
                 
                 <div className="flex items-center">
-                  <Linkedin className="w-6 h-6 text-green-600 mr-3" />
+                  <span className="w-6 h-6 text-green-600 mr-3">💼</span>
                   <div>
                     <p className="font-semibold text-gray-900">LinkedIn</p>
                     <a href="https://linkedin.com/in/lizaboone" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700">Connect with Liza</a>
@@ -591,7 +576,7 @@ function App() {
                 </div>
                 
                 <div className="flex items-center">
-                  <Calendar className="w-6 h-6 text-green-600 mr-3" />
+                  <span className="w-6 h-6 text-green-600 mr-3">📅</span>
                   <div>
                     <p className="font-semibold text-gray-900">Schedule a Call</p>
                     <a href="https://cal.com/lizaboonephd" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700">Book a Discussion</a>
@@ -603,55 +588,55 @@ function App() {
             <div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <Input
+                  <input
                     type="text"
                     name="name"
                     placeholder="Your Name"
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
                 </div>
                 
                 <div>
-                  <Input
+                  <input
                     type="email"
                     name="email"
                     placeholder="Your Email"
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
                 </div>
                 
                 <div>
-                  <Input
+                  <input
                     type="text"
                     name="company"
                     placeholder="Company/Store Name"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
                 </div>
                 
                 <div>
-                  <Textarea
+                  <textarea
                     name="message"
                     placeholder="Tell us about your interest in EngageNatural..."
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    className="w-full h-32"
+                    className="w-full h-32 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
                 </div>
                 
-                <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-                  <MessageSquare className="w-4 h-4 mr-2" />
+                <button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md transition-colors flex items-center justify-center">
+                  <span className="mr-2">💬</span>
                   Send Message
-                </Button>
+                </button>
               </form>
             </div>
           </div>
