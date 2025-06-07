@@ -11,7 +11,7 @@ import './App.css'
 import salesImpactGraph from './assets/sales_impact_graph.png'
 import roiGrowthGraph from './assets/roi_growth_graph.png'
 import userEngagementGraph from './assets/user_engagement_graph.png'
-import lizaHeadshot from './assets/Lizaonbeachheadshot.jpg'
+import lizaHeadshot from './assets/Lizaonbeachheadshot.jpeg'
 import communityPhoto from './assets/communityof5.jpg'
 import diverseGroupPhoto from './assets/grouppicdiverse.jpg'
 import handPilePhoto from './assets/handpile.jpg'
@@ -481,17 +481,6 @@ function App() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-8">
-            {/* Circular Headshot */}
-            <div className="flex-shrink-0">
-              <div className="w-48 h-48 rounded-full overflow-hidden shadow-2xl border-4 border-white">
-                <img 
-                  src={lizaHeadshot} 
-                  alt="Liza Boone - Founder of EngageNatural" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            
             {/* Bio Content */}
             <div className="flex-1 text-center lg:text-left">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -512,6 +501,17 @@ function App() {
                   <Linkedin className="w-5 h-5 mr-2" />
                   LinkedIn Profile
                 </a>
+              </div>
+            </div>
+            
+            {/* Circular Headshot - Positioned on the right to face content */}
+            <div className="flex-shrink-0">
+              <div className="w-48 h-48 rounded-full overflow-hidden shadow-2xl border-4 border-white">
+                <img 
+                  src={lizaHeadshot} 
+                  alt="Liza Boone - Founder of EngageNatural" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
