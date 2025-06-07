@@ -12,11 +12,10 @@ import salesImpactGraph from './assets/sales_impact_graph.png'
 import roiGrowthGraph from './assets/roi_growth_graph.png'
 import userEngagementGraph from './assets/user_engagement_graph.png'
 import lizaHeadshot from './assets/Lizaonbeachheadshot.jpg'
-import communityHero from './assets/communityof5.jpg'
-import handsWithHeart from './assets/handswithheartpaint.jpg'
-import diverseGroup from './assets/grouppicdiverse.jpg'
-import handPile from './assets/handpile.jpg'
-
+import communityPhoto from './assets/communityof5.jpg'
+import diverseGroupPhoto from './assets/grouppicdiverse.jpg'
+import handPilePhoto from './assets/handpile.jpg'
+import handsHeartPhoto from './assets/handswithheartpaint.jpg'
 function App() {
   const [activeTab, setActiveTab] = useState('retail-staff')
   const [formData, setFormData] = useState({
@@ -101,6 +100,7 @@ function App() {
                 For Brands
               </button>
               <a href="/landing" className="text-gray-700 hover:text-green-600 transition-colors">App Details</a>
+              <a href="#book-discussion" className="text-gray-700 hover:text-green-600 transition-colors">Book Discussion</a>
               <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
             </div>
             <div className="flex space-x-4">
@@ -391,6 +391,130 @@ function App() {
               </div>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Book a Discussion Section */}
+      <section id="book-discussion" className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Book a Discussion</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Schedule a personalized conversation about how EngageNatural can transform your retail staff training and engagement.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">What we'll discuss:</h3>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Your specific needs</h4>
+                    <p className="text-gray-600">Understanding your retail environment and training challenges</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">App demonstration</h4>
+                    <p className="text-gray-600">Live walkthrough of EngageNatural's features and capabilities</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Implementation strategy</h4>
+                    <p className="text-gray-600">How to roll out the platform to your retail staff effectively</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">ROI projections</h4>
+                    <p className="text-gray-600">Expected impact on sales, staff retention, and brand loyalty</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="text-center mb-6">
+                <Calendar className="w-12 h-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Schedule Your Call</h3>
+                <p className="text-gray-600">30-minute personalized discussion</p>
+              </div>
+              
+              <div className="bg-gray-50 rounded-lg p-6 text-center">
+                <p className="text-gray-600 mb-4">
+                  Click below to choose a time that works for you
+                </p>
+                <Button 
+                  className="w-full bg-green-600 hover:bg-green-700 text-lg py-3"
+                  onClick={() => {
+                    window.open('https://cal.com/lizaboonephd', '_blank')
+                  }}
+                >
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Schedule with Cal.com
+                </Button>
+                <p className="text-sm text-gray-500 mt-3">
+                  Free consultation • No commitment required • Powered by Cal.com
+                </p>
+              </div>
+              
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-600">
+                  Prefer to reach out directly? 
+                  <Button variant="link" className="text-green-600 p-0 ml-1" onClick={scrollToContact}>
+                    Send us a message
+                  </Button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Founder Bio Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-8">
+            {/* Circular Headshot */}
+            <div className="flex-shrink-0">
+              <div className="w-48 h-48 rounded-full overflow-hidden shadow-2xl border-4 border-white">
+                <img 
+                  src={lizaHeadshot} 
+                  alt="Liza Boone - Founder of EngageNatural" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            
+            {/* Bio Content */}
+            <div className="flex-1 text-center lg:text-left">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Created by Liza Boone — a 30-year veteran of the natural products industry
+              </h3>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                This app was built to empower the people who power your sales: retail staff. With three decades of experience in natural products retail, Liza identified the critical gap between brands and the knowledgeable staff who drive customer satisfaction and sales success.
+              </p>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                EngageNatural bridges this gap by creating genuine connections between industry professionals, fostering the kind of authentic community that leads to better product knowledge, increased customer trust, and ultimately, stronger sales performance across the natural products industry.
+              </p>
+              <div className="flex justify-center lg:justify-start space-x-4">
+                <a href="mailto:lizapoodle@gmail.com" className="inline-flex items-center text-green-600 hover:text-green-700 transition-colors">
+                  <Mail className="w-5 h-5 mr-2" />
+                  Contact Liza
+                </a>
+                <a href="https://linkedin.com/in/liza-boone" className="inline-flex items-center text-green-600 hover:text-green-700 transition-colors">
+                  <Linkedin className="w-5 h-5 mr-2" />
+                  LinkedIn Profile
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
