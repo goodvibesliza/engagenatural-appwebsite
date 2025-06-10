@@ -1,13 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EngageNatural - The Verified App for Natural Retail Staff</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .btn { background: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .debug { background: #f0f0f0; padding: 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: green;">EngageNatural - TEST VERSION</h1>
+        <p>If you can see this, the website is working!</p>
+        <button class="btn">Test Button</button>
+        <div class="debug">
+            <h2>Debug Info:</h2>
+            <p>Static HTML version is working correctly!</p>
+            <p>Date: <span id="date"></span></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('date').textContent = new Date().toLocaleString();
+    </script>
+</body>
 </html>
